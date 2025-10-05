@@ -303,7 +303,7 @@ contract mainfunc is ERC20, ERC20Pausable, AccessControl, ReentrancyGuard {
         updateReward(msg.sender);
         uint256 earned = userDayReward[msg.sender][day];
         require(rewards[msg.sender] > 0, "No reward available");
-        require(claimCooldown[msg.sender] <= day, "Claim cooldown active");
+        require(claimCooldown[msg.sender] < day, "Claim cooldown active");
         if (earned > available){
             earned = dailyCap;
             rewards[msg.sender] -= dailyCap;
